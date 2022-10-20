@@ -1,0 +1,23 @@
+{
+    "CHANNEL": "IBANK",
+    "MOBILE_PATTERN": "^[\\+\\d]+(?:[\\d-.\\s()]*)$",
+    "EMAIL_PATTERN": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$",
+    "TEXT_PATTERN": "^[a-zA-Z\\s]+$",
+    "MAX_FILE_SIZE": 1,
+    "CORS_URL": "https://cors-anywhere.herokuapp.com/",
+    "BASE_URL": "http://www.server-api.stronpower.com/",
+    "vendingMeter": "api/VendingMeter",
+    "DATE_FORMAT": "MM/dd/YYYY",
+    "APP_TITLE": "Corporate Account Opening Web Engine",
+    "PURPOSE": "Account Opening",
+    "ERROR_MESSAGE": {
+      "DEFAULT": "Something went wrong. Please call our customer care for support.",
+      "WRONG_TIER": "You are not eligible to open an account. Please call our customer care for support.",
+      "EXISTING_CUSTOMER": "You are already an existing customer. Please open an additional account.",
+      "OTP_SENT": "OTP has been sent to your phone number. Please check your phone and enter the OTP.",
+      "OTP_FAILURE": "OTP could not be sent. Please call our customer care for support or check that you entered the correct phone number.",
+      "FEEDBACK_SUCCESS": "Feedback submitted successfully. Thank you for your feedback.",
+      "FEEDBACK_FAILURE": "Feedback could not be submitted. Please call our customer care for support."
+    }
+  }
+  

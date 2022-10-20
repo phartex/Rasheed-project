@@ -1,0 +1,115 @@
+<!-- <app-navbar></app-navbar> -->
+<!-- <p>hdhdh</p>
+<div class="px-4">
+    <div class="max-w-3xl bg-white rounded-lg mx-auto my-16 p-16">
+      <h1 class="text-2xl font-medium mb-2">Let's Build: With Tailwind CSS</h1>
+      <h2 class="font-medium text-sm text-indigo-400 mb-4 uppercase tracking-wide">Responsive Navbar</h2>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum illo cupiditate molestias atque consequuntur ea quo cumque, odit velit sint similique? Asperiores ratione aperiam tempora, alias corrupti deleniti quaerat molestiae.
+    </div>
+  </div> -->
+
+
+
+<!-- <div class="bg-white rounded-lg mx-auto my-3 p-10 lg:flex items-center justify-around text-base text-gray-700"> -->
+<!-- (input)="inputHandle($event)" -->
+<section class="my-container">
+
+    <div class="loader-container" *ngIf="loading$ | async">
+        <mat-progress-spinner [mode]="'indeterminate'" style="top: 50%; left: 50%"></mat-progress-spinner>
+    </div>
+    
+    <div class="text-base md:flex md:justify-between items-center pt-10 md:pt-20 px-10 container">
+        <p class="text-1xl text-gray-400 text-center md:hidden">{{meterErrorMessage}}</p>
+        <div class="justify-center text-center md:text-start md:mt-0">
+           
+            <p class="text-3xl md:text-5xl font-bold">Welcome</p>
+            <p class="text-2xl md:text-3xl">Buy power from anywhere</p>
+          
+        </div>
+        <div class="text-base grow">
+            <form class="form" [formGroup]="requestForm">
+                <div class="">
+                    <p class="hidden text-3xl text-gray-400 text-center md:block">{{meterErrorMessage}}</p>
+                    <!-- <div>
+                        <mat-form-field class="m-4" style="width: 90%;" appearance="outline" [floatLabel]="'never'"
+                            matTooltip="Enter Meter Number" aria-label="Amount filter" [matTooltipPosition]="'above'">
+                            <mat-label>Meter Number</mat-label>
+                            <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
+                                formControlName="meterNo" placeholder="Enter Meter Number">
+                            <mat-error>please enter meter number</mat-error>
+                        </mat-form-field>
+                    </div> -->
+
+                    <div>
+                        <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
+                            matTooltip="Enter Meter Number" aria-label="Amount filter" [matTooltipPosition]="'above'">
+                            <mat-label>Meter Number</mat-label>
+                            <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
+                                formControlName="meterNo" placeholder="Enter Meter Number">
+                            <mat-error>please enter meter number</mat-error>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div>
+                        <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
+                            matTooltip="Enter amount" aria-label="Amount filter" [matTooltipPosition]="'above'">
+                            <mat-label>Amount</mat-label>
+                            <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
+                                formControlName="amount" placeholder="Enter Amount">
+                            <mat-error>please enter amount</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <!-- <div class="items-center justify-evenly md:flex ">
+                <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
+                    matTooltip="Enter amount" aria-label="Amount filter" [matTooltipPosition]="'above'">
+                    <mat-label>Amount</mat-label>
+                    <input id="amountFilter" name="amountFilter" matInput formControlName="amount"
+                        placeholder="Enter Amount">
+                    <mat-error>please enter amount</mat-error>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="!fullDetails" style="width: 90%;" class="m-4" appearance="outline"
+                    [floatLabel]="'never'" matTooltip="Enter meter name" aria-label="MeterName filter"
+                    [matTooltipPosition]="'above'">
+                    <mat-label>Meter Name</mat-label>
+                    <input id="meternameFilter" name="amountFilter" matInput formControlName="meterName"
+                        placeholder="Enter Meter Name">
+                    <mat-error>please enter meter name</mat-error>
+                </mat-form-field>
+            </div> -->
+
+                <div class="" *ngIf="fullDetails">
+                    <mat-form-field class="m-4" style="width: 90%;" appearance="outline" [floatLabel]="'never'"
+                        matTooltip="Enter Phone Number" aria-label="Amount filter" [matTooltipPosition]="'above'">
+                        <mat-label>Phone Number</mat-label>
+                        <input id="amountFilter" readonly name="amountFilter" matInput formControlName="phoneNo"
+                            placeholder="Enter Phone Number">
+                        <mat-error>please enter phone number</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
+                        matTooltip="Enter address" aria-label="Address filter" [matTooltipPosition]="'above'">
+                        <mat-label>Address</mat-label>
+                        <input id="addressFilter" readonly name="addressFilter" matInput formControlName="address"
+                            placeholder="Enter Address">
+                        <mat-error>please enter address</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="justify-center text-center mt-3" *ngIf="!buttonTextChange">
+                    <button mat-raised-button color="primary" [disabled]="requestForm.invalid" class="text-1xl p-1"
+                        style="width:80%;padding: 0.3em;" (click)="getDetails()">Proceed</button>
+                </div>
+                <div class="justify-center text-center mt-3" *ngIf="buttonTextChange">
+                    <button mat-raised-button color="primary" class="text-1xl p-1"
+                        style="width:80%;padding: 0.3em;" (click)="submitForm()">make payment</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>

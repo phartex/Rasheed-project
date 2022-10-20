@@ -1,0 +1,18 @@
+
+<div class="font-bold text-base mb-4 relative">
+
+    {{ data.type | titlecase }}
+
+</div>
+
+<div class="text-base mb-3">{{ data.message }}</div>
+
+<div>
+
+    <span (click)="snackBarRef.dismiss()" class="cursor-pointer font-semibold text-sm">
+
+        {{ data.buttonText }}
+
+    </span>
+
+</div>

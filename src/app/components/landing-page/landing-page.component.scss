@@ -1,0 +1,44 @@
+mat-progress-spinner{
+    transform: translate(-50%, -50%);
+  }
+  
+  .loader-container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: black;
+    z-index: 99;
+    opacity: 0.8;
+  }
+.mat-form-field{
+    width: 60%;
+}
+.my-container{
+//     background-image: url(../../../assets/img/Rasheed-logo.jpg);
+//     background-repeat: no-repeat;
+//     background-position: center;
+// background-size: cover;
+// height: 100vh;
+// margin-top: 0;
+}
+
+@media screen and (max-width:767px){
+    .my-container{
+        background-image: none;
+       
+    }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: .5em;
+}
+
+:host ::ng-deep .mat-form-field-wrapper{
+    margin: 0 !important;
+    padding: 0;
+  }
+
+
+  .mat-error {
+    padding-top: 1.5em;
+}

@@ -12,7 +12,7 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpinterceptorService } from './services/httpinterceptor.service';
 import { LoaderService } from './services/loader.service';
-
+import { FlutterwaveModule } from "flutterwave-angular-v3"
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   validation: false,
@@ -31,7 +31,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-  
+    FlutterwaveModule,
     NgxMaskModule.forRoot(options),
   ],
   providers: [

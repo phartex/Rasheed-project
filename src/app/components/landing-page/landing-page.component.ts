@@ -4,7 +4,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { LoaderService } from 'src/app/services/loader.service';
-
+import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from "flutterwave-angular-v3"
 
 @Component({
   selector: 'app-landing-page',
@@ -15,16 +15,38 @@ export class LandingPageComponent implements OnInit {
   requestForm!: FormGroup;
   fullDetails: boolean = false;
   buttonTextChange: boolean = false;
-  meterErrorMessage?: string = "";
+  meterErrorMessage? : string = "";
   loading$ = this.loader.loading$;
-
+  publicKey = "FLWPUBK_TEST-e49cf6315111eb44cdd54c8c4384b599-X";
+ 
+  customerDetails = { name: 'Demo Customer  Name', email: 'customer@mail.com', phone_number: '08100000000'}
+ 
+  customizations = {title: 'Customization Title', description: 'Customization Description', logo: 'https://flutterwave.com/images/logo-colored.svg'}
+ 
+  meta = {'counsumer_id': '7898', 'consumer_mac': 'kjs9s8ss7dd'}
+ 
+  paymentData: InlinePaymentOptions = {
+    public_key: this.publicKey,
+    tx_ref: this.generateReference(),
+    amount: 10,
+    currency: 'NGN',
+    payment_options: 'card,ussd',
+    redirect_url: '',
+    meta: this.meta,
+    customer: this.customerDetails,
+    customizations: this.customizations,
+    callback: this.makePaymentCallback,
+    onclose: this.closedPaymentModal,
+    callbackContext: this
+  }
 
   constructor(
     private loader: LoaderService,
     private fb: FormBuilder,
     private router: Router,
     private transactionService: TransactionService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private flutterwave : Flutterwave
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +54,21 @@ export class LandingPageComponent implements OnInit {
 
   };
 
+  makePayment(){
+    this.flutterwave.inlinePay(this.paymentData)
+  };
+
+  makePaymentCallback(response: PaymentSuccessResponse): void {
+    console.log("Pay", response);
+    this.flutterwave.closePaymentModal(5)
+  }
+  closedPaymentModal(): void {
+    console.log('payment is closed');
+  }
+  generateReference(): string {
+    let date = new Date();
+    return date.getTime().toString();
+  }
   // inputHandle(event : any) {
   //   var number = event.target.value;
 
@@ -70,14 +107,15 @@ export class LandingPageComponent implements OnInit {
     //   'error',
     //   'your form has been submitted',
     //   'Dismiss')
-    this.transactionService.sendAmount(this.requestForm.value.meterNo, this.requestForm.value.amount)
+    this.transactionService.queryMeter(this.requestForm.value.meterNo, this.requestForm.value.amount)
       .subscribe((data) => {
-
+      
         console.log(data);
         if (data.length === 0) {
-          this.meterErrorMessage = `Meter Id ${this.requestForm.value.meterNo} doesn't exist`;
+          
+          this.meterErrorMessage  = `Meter Id ${this.requestForm.value.meterNo} doesn't exist`;
           setTimeout(() => {
-            this.meterErrorMessage = '';
+            this.meterErrorMessage  = '';
           }, 6000);
           this.requestForm.reset();
         } else {
@@ -95,9 +133,10 @@ export class LandingPageComponent implements OnInit {
       });
   };
 
-
+  
   submitForm() {
-    console.log('going')
+    this.transactionService.sendAmount(this.paymentData)
+   console.log('going')
   }
 
   toggleForm() {

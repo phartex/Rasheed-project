@@ -1,0 +1,10 @@
+<!-- <div class="loader-container" *ngIf="loading$ | async">
+    <mat-progress-spinner [mode]="'indeterminate'" style="top: 50%; left: 50%"></mat-progress-spinner>
+</div> -->
+
+<div class="container px-7 mt-7 md:px-20 md:text-start md:mt-20 shadow" *ngFor="let item of details">
+<p class="text-xl md:text-2xl text-gray-600">Token : {{item.Token}} </p>
+<p class="text-xl md:text-2xl text-gray-600">Amount : {{item.Total_paid}}</p>
+<p class="text-xl md:text-2xl text-gray-600">Address : {{item.Customer_address}}</p>
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 show! :boolean ;
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
     
@@ -17,6 +18,11 @@ show! :boolean ;
  this.show = !this.show;
     
     
+  }
+
+  test(){
+    console.log('hjhghjg');
+    this.router.navigateByUrl('/remita')
   }
 
 }

@@ -6,6 +6,7 @@
   "MAX_FILE_SIZE": 1,
   "CORS_URL": "https://cors-anywhere.herokuapp.com/",
   "BASE_URL": "http://www.server-api.stronpower.com/",
+  "QUERYMETERINFO": "api/QueryMeterInfo",
   "vendingMeter": "api/VendingMeter",
   "DATE_FORMAT": "MM/dd/YYYY",
   "APP_TITLE": "Corporate Account Opening Web Engine",

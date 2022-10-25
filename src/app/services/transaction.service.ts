@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Flutterwave, InlinePaymentOptions, PaymentSuccessResponse } from "flutterwave-angular-v3"
-import { catchError, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { ISendAmount, ISendAmountResponse } from '../model/ITransaction';
 import { AppConfigService } from './config/app-config.service';
+
 
 
 const httpOptions = {
@@ -30,23 +31,53 @@ export class TransactionService {
     amount: 10,
     currency: 'NGN',
     payment_options: 'card,ussd',
-    redirect_url: 'www.google.com',
+    redirect_url: 'http://localhost:4200/token',
     meta: this.meta,
     customer: this.customerDetails,
     customizations: this.customizations,
     callback: this.makePaymentCallback,
     onclose: this.closedPaymentModal,
     callbackContext: this
-  }
+  };
+
+  private tokenSource$ = new BehaviorSubject<string>('');
+  public token = this.tokenSource$.asObservable();
 
   constructor(private config: AppConfigService,
     private flutterwave: Flutterwave,
-    private http: HttpClient,) { }
+    private http: HttpClient,
+  ) { }
 
-
-
-
+  
+ 
   queryMeter(MeterId: any, Amount: any): Observable<ISendAmountResponse[]> {
+    const body: ISendAmount = {
+      CompanyName: "Lion-Edge",
+      UserName: "Harbdulrashyd",
+      PassWord: "123456",
+      MeterId,
+      is_vend_by_unit: "false",
+      Amount
+    };
+    console.log(body);
+
+    let path = `https://cors-anywhere.herokuapp.com/${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
+    // let path = `https://cors-anywhere.herokuapp.com/http://www.server-api.stronpower.com/api/VendingMeter`;
+
+    return this.http.post<ISendAmountResponse[]>(path, body,
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+        }),
+      }).pipe(
+        tap((res) => {
+          console.log('This is the API response', res);
+        }),
+      );
+  };
+
+
+  getVendingMeterDetails(MeterId: any, Amount: any){
     const body: ISendAmount = {
       CompanyName: "Lion-Edge",
       UserName: "Harbdulrashyd",
@@ -64,23 +95,21 @@ export class TransactionService {
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
-          // "User-Agent": "PostmanRuntime/7.29.2",
-          // "Accept-Encoding":"gzip, deflate, br"
         }),
       }).pipe(
         tap((res) => {
           console.log('This is the API response', res);
         }),
-
       );
   }
 
   sendAmount(value: any) {
-    
-console.log(value)
+
+    console.log(value)
 
   }
-  makePayment() {
+  makePayment(amount: any) {
+    this.paymentData.amount = amount;
     this.flutterwave.inlinePay(this.paymentData)
   };
 

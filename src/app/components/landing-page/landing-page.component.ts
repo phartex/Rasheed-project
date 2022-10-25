@@ -4,7 +4,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from "flutterwave-angular-v3"
+import { Flutterwave, InlinePaymentOptions, PaymentSuccessResponse } from "flutterwave-angular-v3"
+import { DataserviceService } from 'src/app/services/dataservice.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,16 +16,16 @@ export class LandingPageComponent implements OnInit {
   requestForm!: FormGroup;
   fullDetails: boolean = false;
   buttonTextChange: boolean = false;
-  meterErrorMessage? : string = "";
+  meterErrorMessage?: string = "";
   loading$ = this.loader.loading$;
   publicKey = "FLWPUBK_TEST-e49cf6315111eb44cdd54c8c4384b599-X";
- 
-  customerDetails = { name: 'Demo Customer  Name', email: 'customer@mail.com', phone_number: '08100000000'}
- 
-  customizations = {title: 'Customization Title', description: 'Customization Description', logo: 'https://flutterwave.com/images/logo-colored.svg'}
- 
-  meta = {'counsumer_id': '7898', 'consumer_mac': 'kjs9s8ss7dd'}
- 
+
+  customerDetails = { name: 'Demo Customer  Name', email: 'customer@mail.com', phone_number: '08100000000' }
+
+  customizations = { title: 'Customization Title', description: 'Customization Description', logo: 'https://flutterwave.com/images/logo-colored.svg' }
+
+  meta = { 'counsumer_id': '7898', 'consumer_mac': 'kjs9s8ss7dd' }
+
   paymentData: InlinePaymentOptions = {
     public_key: this.publicKey,
     tx_ref: this.generateReference(),
@@ -46,7 +47,9 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private transactionService: TransactionService,
     private notification: NotificationService,
-    private flutterwave : Flutterwave
+    private flutterwave: Flutterwave,
+    private dataservice: DataserviceService
+
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +57,7 @@ export class LandingPageComponent implements OnInit {
 
   };
 
-  makePayment(){
+  makePayment() {
     this.flutterwave.inlinePay(this.paymentData)
   };
 
@@ -83,10 +86,9 @@ export class LandingPageComponent implements OnInit {
 
   createPinFormAction() {
     this.requestForm = this.fb.group({
-      phoneNo: ['',],
+      CustomerName: ['',],
       meterNo: ['', Validators.required],
       amount: ['', Validators.required],
-      meterName: ['',],
       address: ['',],
     });
   }
@@ -109,23 +111,27 @@ export class LandingPageComponent implements OnInit {
     //   'Dismiss')
     this.transactionService.queryMeter(this.requestForm.value.meterNo, this.requestForm.value.amount)
       .subscribe((data) => {
-      
         console.log(data);
         if (data.length === 0) {
-          
-          this.meterErrorMessage  = `Meter Id ${this.requestForm.value.meterNo} doesn't exist`;
+
+          this.meterErrorMessage = `Meter Id ${this.requestForm.value.meterNo} doesn't exist`;
           setTimeout(() => {
-            this.meterErrorMessage  = '';
+            this.meterErrorMessage = '';
           }, 6000);
           this.requestForm.reset();
         } else {
+          let props = {
+            amount: this.requestForm.value.amount,
+            meterNo: this.requestForm.value.meterNo
+          }
+          sessionStorage.setItem('amountAndMeterNo', JSON.stringify(props));
           this.fullDetails = true;
           data.map((item) => {
             this.requestForm.patchValue({
-              phoneNo: item.Customer_phone,
+              CustomerName: item.Customer_name,
               address: item.Customer_address,
-              meterName: item.Meter_type
-            })
+            });
+
           })
           this.buttonTextChange = true;
         }
@@ -133,14 +139,26 @@ export class LandingPageComponent implements OnInit {
       });
   };
 
-  
+
+
   submitForm() {
-    this.transactionService.sendAmount(this.paymentData)
-   console.log('going')
+    this.transactionService.makePayment(this.requestForm.value.amount)
+    console.log('going')
   }
 
   toggleForm() {
+    console.log('gone')
+    let amount = "djdjdj";
+    this.dataservice.saveNewAcccountNumber(amount);
+    this.dataservice.sendToken("God");
+    window.open('http://localhost:4200/token')
+    // this.fullDetails = !this.fullDetails;
+  };
 
-    this.fullDetails = !this.fullDetails;
+  test(){
+    
+    this.router.navigateByUrl('/remita')
   }
+
+  
 }

@@ -4,6 +4,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomMaterialModule } from './custom-material/custom-material/custom-material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -20,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     CustomMaterialModule,
-    NavbarComponent
+    NavbarComponent, 
+    RouterModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }

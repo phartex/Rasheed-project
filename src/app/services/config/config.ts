@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 
 export interface AppConfig {
-  vendingMeter: any;
+  VENDINGMETER: string;
   CHANNEL: string;
   MOBILE_PATTERN: string;
   EMAIL_PATTERN: string;
@@ -13,7 +13,10 @@ export interface AppConfig {
   APP_TITLE: string;
   PURPOSE: string;
   ERROR_MESSAGE: Record<string, string>;
-
+  QUERYMETERINFO: string;
+  CORS_URL: string;
+  CORS_URL2: string;
+  QUERYMETERCREDIT : string;
 }
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');

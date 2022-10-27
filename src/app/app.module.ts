@@ -14,7 +14,8 @@ import { HttpinterceptorService } from './services/httpinterceptor.service';
 import { LoaderService } from './services/loader.service';
 import { FlutterwaveModule } from "flutterwave-angular-v3";
 import { TokenpageComponent } from './components/tokenpage/tokenpage.component';
-import { RemitaComponent } from './components/remita/remita.component'
+import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
+import { HistoryComponent } from './components/history/history.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   validation: false,
@@ -26,8 +27,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     LandingPageComponent,
     NotificationComponent,
     TokenpageComponent,
-    RemitaComponent,
-    routingComponents
+    routingComponents,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +39,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     SharedModule,
     FlutterwaveModule,
     NgxMaskModule.forRoot(options),
+    NgInterswitchModule
   ],
   providers: [
     {

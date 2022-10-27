@@ -60,8 +60,9 @@ export class TransactionService {
       Amount
     };
     console.log(body);
-
-    let path = `https://cors-anywhere.herokuapp.com/${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
+    
+    let path = `${this.config.appConfig.CORS_URL}${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
+    // let path = `https://cors-anywhere.herokuapp.com/${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
     // let path = `https://cors-anywhere.herokuapp.com/http://www.server-api.stronpower.com/api/VendingMeter`;
 
     return this.http.post<ISendAmountResponse[]>(path, body,
@@ -88,7 +89,7 @@ export class TransactionService {
     };
     console.log(body);
 
-    let path = `https://cors-anywhere.herokuapp.com/${this.config.appConfig.BASE_URL}${this.config.appConfig.vendingMeter}`;
+    let path = `${this.config.appConfig.CORS_URL}${this.config.appConfig.BASE_URL}${this.config.appConfig.VENDINGMETER}`;
     // let path = `https://cors-anywhere.herokuapp.com/http://www.server-api.stronpower.com/api/VendingMeter`;
 
     return this.http.post<ISendAmountResponse[]>(path, body,
@@ -101,7 +102,35 @@ export class TransactionService {
           console.log('This is the API response', res);
         }),
       );
+  };
+
+
+queryMeterCredit(MeterId: any): Observable<any> {
+    const body = {
+      CompanyName: "Lion-Edge",
+      UserName: "Harbdulrashyd",
+      PassWord: "123456",
+      MeterId
+    };
+
+    let path = `${this.config.appConfig.CORS_URL}${this.config.appConfig.BASE_URL}${this.config.appConfig.QUERYMETERCREDIT}`;
+    return this.http.post<ISendAmountResponse[]>(path, body,
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+        }),
+      }).pipe(
+        tap((res) => {
+          console.log('This is the API response', res);
+        }),
+      );
   }
+
+
+
+
+
+
 
   sendAmount(value: any) {
 

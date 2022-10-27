@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RemitaComponent } from './remita.component';
+import { HistoryComponent } from './history.component';
 
-describe('RemitaComponent', () => {
-  let component: RemitaComponent;
-  let fixture: ComponentFixture<RemitaComponent>;
+describe('HistoryComponent', () => {
+  let component: HistoryComponent;
+  let fixture: ComponentFixture<HistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemitaComponent ]
+      declarations: [ HistoryComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RemitaComponent);
+    fixture = TestBed.createComponent(HistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

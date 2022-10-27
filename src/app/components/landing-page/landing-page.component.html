@@ -12,25 +12,28 @@
 
 <!-- <div class="bg-white rounded-lg mx-auto my-3 p-10 lg:flex items-center justify-around text-base text-gray-700"> -->
 <!-- (input)="inputHandle($event)" -->
-<section class="my-container">
+<section class="">
 
     <div class="loader-container" *ngIf="loading$ | async">
         <mat-progress-spinner [mode]="'indeterminate'" style="top: 50%; left: 50%"></mat-progress-spinner>
     </div>
-    
-    <div class="text-base md:flex md:justify-between items-center pt-10 md:pt-20 px-10 container">
-        <p class="text-1xl text-gray-400 text-center md:hidden">{{meterErrorMessage}}</p>
-        <div class="justify-center text-center md:text-start md:mt-0">
-           
-            <p class="text-3xl md:text-5xl font-bold">Welcome</p>
-            <p class="text-2xl md:text-3xl">Buy power from anywhere</p>
-          
+
+    <div class="text-base text-center md:text-start block md:grid md:grid-cols-6 justify-center mx-auto items-center">
+        <!-- <p class="text-1xl text-gray-400 text-center md:hidden">{{meterErrorMessage}}</p> -->
+        <div class="col-span-3 mt-2">
+
+
+            <div class="hidden md:block md:h-screen my-container md:rounded-2xl md:mx-5" style="height: 89vh;">
+                <!-- <img class="rounded-2xl"  src="assets/img/bulb.png" alt=""/> -->
+            </div>
+
         </div>
-        <div class="text-base grow">
+        <div class="text-base col-span-3 w-full md:pl-11 mt-10 ">
             <form class="form" [formGroup]="requestForm">
-                <div class="">
-                    <p class="hidden text-3xl text-gray-400 text-center md:block">{{meterErrorMessage}}</p>
-                    <!-- <div>
+                <p class="text-3xl md:text-5xl text-grey font-medium">Welcome</p>
+                <p class="text-2xl md:text-3xl">Buy power from anywhere</p>
+                <p class="hidden text-3xl text-gray-400 text-center md:block">{{meterErrorMessage}}</p>
+                <!-- <div>
                         <mat-form-field class="m-4" style="width: 90%;" appearance="outline" [floatLabel]="'never'"
                             matTooltip="Enter Meter Number" aria-label="Amount filter" [matTooltipPosition]="'above'">
                             <mat-label>Meter Number</mat-label>
@@ -40,27 +43,25 @@
                         </mat-form-field>
                     </div> -->
 
-                    <div>
-                        <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
-                            matTooltip="Enter Meter Number" aria-label="Amount filter" [matTooltipPosition]="'above'">
-                            <mat-label>Meter Number</mat-label>
-                            <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
-                                formControlName="meterNo" placeholder="Enter Meter Number">
-                            <mat-error>please enter meter number</mat-error>
-                        </mat-form-field>
-                    </div>
+                <div class="my-5 md:my-4">
+                    <mat-form-field class="mt-6" appearance="outline" [floatLabel]="'never'" matTooltip="Enter Meter Number"
+                        aria-label="Amount filter" [matTooltipPosition]="'above'">
+                        <mat-label>Meter Number</mat-label>
+                        <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
+                            formControlName="meterNo" placeholder="Enter Meter Number">
+                        <mat-error>please enter meter number</mat-error>
+                    </mat-form-field>
+                </div>
 
 
-                    <div>
-                        <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
-                            matTooltip="" aria-label="Amount filter" [matTooltipPosition]="'above'">
-                            <mat-label>Amount</mat-label>
-                            <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
-                                formControlName="amount" placeholder="Enter Amount">
-                            <mat-error>please enter amount</mat-error>
-                        </mat-form-field>
-                    </div>
-
+                <div class="my-5 md:my-4">
+                    <mat-form-field class="" appearance="outline" [floatLabel]="'never'" matTooltip=""
+                        aria-label="Amount filter" [matTooltipPosition]="'above'">
+                        <mat-label>Amount</mat-label>
+                        <input id="amountFilter" mask="000000000000000000" name="amountFilter" matInput
+                            formControlName="amount" placeholder="Enter Amount">
+                        <mat-error>please enter amount</mat-error>
+                    </mat-form-field>
                 </div>
                 <!-- <div class="items-center justify-evenly md:flex ">
                 <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
@@ -81,9 +82,9 @@
                 </mat-form-field>
             </div> -->
 
-                <div class="" *ngIf="fullDetails">
-                    <mat-form-field class="m-4" style="width: 90%;" appearance="outline" [floatLabel]="'never'"
-                        matTooltip="" aria-label="Amount filter" [matTooltipPosition]="'above'">
+                <div class="my-5 md:my-4" *ngIf="fullDetails">
+                    <mat-form-field class="" appearance="outline" [floatLabel]="'never'" matTooltip=""
+                        aria-label="Amount filter" [matTooltipPosition]="'above'">
                         <mat-label>Customer Name</mat-label>
                         <input id="amountFilter" readonly name="amountFilter" matInput formControlName="CustomerName"
                             placeholder="Enter Customer Name">
@@ -91,7 +92,7 @@
                     </mat-form-field>
 
 
-                    <mat-form-field style="width: 90%;" class="m-4" appearance="outline" [floatLabel]="'never'"
+                    <mat-form-field class="mt-4" appearance="outline" [floatLabel]="'never'"
                         matTooltip="" aria-label="Address filter" [matTooltipPosition]="'above'">
                         <mat-label>Address</mat-label>
                         <input id="addressFilter" readonly name="addressFilter" matInput formControlName="address"
@@ -101,25 +102,32 @@
 
                 </div>
 
-                
-                <div class="justify-center text-center mt-3" *ngIf="!buttonTextChange">
-                    <button mat-raised-button color="primary" [disabled]="requestForm.invalid" class="text-1xl p-1"
-                        style="width:80%;padding: 0.3em;" (click)="getDetails()">Proceed</button>
-                </div>
-                <div class="justify-center text-center mt-3" *ngIf="buttonTextChange">
-                    <div><button mat-raised-button color="primary" class="text-1xl p-1"
-                        style="width:80%;padding: 0.3em;" (click)="submitForm()">Flutterwave</button></div>
-                    
-                </div>
 
-                <div class="justify-center text-center mt-3" *ngIf="buttonTextChange">
-                    <div><button mat-raised-button color="primary" class="text-1xl p-1"
-                        style="width:80%;padding: 0.3em;" (click)="test()">inter</button></div>
+
+
+                <!-- <div class="justify-center text-center mt-3" *ngIf="buttonTextChange">
+                    <ng-interswitch
+                    [merchantCode]="'MX104430'"
+                    [payItemID]="'Default_Payable_MX104430'"
+                    [amount]="'10000'"
+                    [transactionReference]= "transRef"
+                    [customerEmail]="'johndoe@gmail.com'"
+                    [customerName]="'John Doe'"
+                    (paymentCallback)="paymentCallback($event)"
+                    [class]="'btn btn-danger'"
+                  >Make Payment</ng-interswitch>
                     
-                </div>
+                </div> -->
 
             </form>
+            <div class="mt-8" *ngIf="!buttonTextChange">
+                <button style="width: 360px;" mat-raised-button color="primary" [disabled]="requestForm.invalid"
+                    class="text-1xl p-1" (click)="getDetails()">Proceed</button>
+            </div>
+            <div class="mt-8" *ngIf="buttonTextChange">
+                <button style="width: 360px;" mat-raised-button color="primary" class="text-1xl p-1"
+                    (click)="submitForm()">make payment</button>
+            </div>
         </div>
     </div>
 </section>
-

@@ -39,6 +39,15 @@ export class LandingPageComponent implements OnInit {
     callback: this.makePaymentCallback,
     onclose: this.closedPaymentModal,
     callbackContext: this
+  };
+
+  transRef: any = Date.now().toString();
+  paymentOption = {
+    merchantCode: 'XXXXXXXXX',
+    payItemID: 'XXXXXXXXXXXXXXXXXXXXX',
+    amount: '1000',
+    customerEmail: 'toyosioyelayo@gmail.com',
+    customerName: 'Toyosi Oyelayo'
   }
 
   constructor(
@@ -158,6 +167,10 @@ export class LandingPageComponent implements OnInit {
   test(){
     
     this.router.navigateByUrl('/remita')
+  };
+
+  paymentCallback(data : any){
+    console.log('data: ', data);
   }
 
   

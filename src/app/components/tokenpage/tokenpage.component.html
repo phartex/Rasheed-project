@@ -1,10 +1,18 @@
-<!-- <div class="loader-container" *ngIf="loading$ | async">
+<div class="loader-container" *ngIf="loading$ | async">
     <mat-progress-spinner [mode]="'indeterminate'" style="top: 50%; left: 50%"></mat-progress-spinner>
-</div> -->
+</div>
+<!-- class="container items-center mx-auto justify-center shadow" -->
 
-<div class="container px-7 mt-7 md:px-20 md:text-start md:mt-20 shadow" *ngFor="let item of details">
-<p class="text-xl md:text-2xl text-gray-600">Token : {{item.Token}} </p>
-<p class="text-xl md:text-2xl text-gray-600">Amount : {{item.Total_paid}}</p>
-<p class="text-xl md:text-2xl text-gray-600">Address : {{item.Customer_address}}</p>
+<div class="container flex justify-center text-start shadow mt-4 py-8" *ngFor="let item of details">
+    <div>
+        <p class="text-xl text-center md:bg-black md:text-white w-40 md:p-3 md:mb-4 rounded-xl">Your details</p>
+        <div class="mt-5 md:mt-0">
+            <p class="text-xl md:text-2xl text-gray-600">Token : {{item.Token}} </p>
+            <p class="text-xl md:text-2xl text-gray-600">Amount : {{item.Total_paid}}</p>
+            <p class="text-xl md:text-2xl text-gray-600">Address : {{item.Customer_address}}</p>
+        </div>
+
+
+    </div>
 
 </div>

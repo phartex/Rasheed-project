@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HistoryComponent } from './components/history/history.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { RemitaComponent } from './components/remita/remita.component';
 import { TokenpageComponent } from './components/tokenpage/tokenpage.component';
 
 const routes: Routes = [
@@ -14,8 +14,8 @@ const routes: Routes = [
     component : TokenpageComponent
   },
   {
-    path: 'remita',
-    component : RemitaComponent
+    path: 'history',
+    component : HistoryComponent
   }
 ];
 
@@ -24,4 +24,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [LandingPageComponent, TokenpageComponent, RemitaComponent]
+export const routingComponents = [LandingPageComponent, TokenpageComponent]

@@ -15,14 +15,16 @@ show! :boolean ;
   }
 
   toggle(){
- this.show = !this.show;
-    
-    
+ this.show = !this.show; 
+  };
+
+  navigateToHome(){
+    this.router.navigateByUrl('/')
   }
 
-  test(){
+  navigateToHistory(){
     console.log('hjhghjg');
-    this.router.navigateByUrl('/remita')
+    this.router.navigateByUrl('/history')
   }
 
 }

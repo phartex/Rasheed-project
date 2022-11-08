@@ -31,7 +31,7 @@ export class TransactionService {
     amount: 10,
     currency: 'NGN',
     payment_options: 'card,ussd',
-    redirect_url: 'http://localhost:4200/token',
+    redirect_url: '',
     meta: this.meta,
     customer: this.customerDetails,
     customizations: this.customizations,
@@ -61,14 +61,15 @@ export class TransactionService {
     };
     console.log(body);
     
-    let path = `${this.config.appConfig.CORS_URL}${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
-    // let path = `https://cors-anywhere.herokuapp.com/${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
-    // let path = `https://cors-anywhere.herokuapp.com/http://www.server-api.stronpower.com/api/VendingMeter`;
+    let path = `${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
+    // let path = `${this.config.appConfig.BASE_URL}api/QueryMeterInfo`;
+   
 
     return this.http.post<ISendAmountResponse[]>(path, body,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
+          'mode': 'no-cors'
         }),
       }).pipe(
         tap((res) => {
@@ -89,8 +90,8 @@ export class TransactionService {
     };
     console.log(body);
 
-    let path = `${this.config.appConfig.CORS_URL}${this.config.appConfig.BASE_URL}${this.config.appConfig.VENDINGMETER}`;
-    // let path = `https://cors-anywhere.herokuapp.com/http://www.server-api.stronpower.com/api/VendingMeter`;
+    let path = `${this.config.appConfig.BASE_URL}${this.config.appConfig.VENDINGMETER}`;
+    
 
     return this.http.post<ISendAmountResponse[]>(path, body,
       {
@@ -113,7 +114,7 @@ queryMeterCredit(MeterId: any): Observable<any> {
       MeterId
     };
 
-    let path = `${this.config.appConfig.CORS_URL}${this.config.appConfig.BASE_URL}${this.config.appConfig.QUERYMETERCREDIT}`;
+    let path = `${this.config.appConfig.BASE_URL}${this.config.appConfig.QUERYMETERCREDIT}`;
     return this.http.post<ISendAmountResponse[]>(path, body,
       {
         headers: new HttpHeaders({

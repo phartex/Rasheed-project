@@ -1,1 +1,18 @@
-<p>history works!</p>
+<div class="loader-container" *ngIf="loading$ | async">
+    <mat-progress-spinner [mode]="'indeterminate'" style="top: 50%; left: 50%"></mat-progress-spinner>
+</div>
+
+<div class="container mt-3">
+    <p class="text-3xl text-center py-4">History</p>
+    <div class="grid grid-cols-3 gap-6 justify-center px-40">
+        
+
+        <div *ngFor="let history of historyData" class="p-5 border-solid border-2 items-center rounded-xl">
+            <p>Amount: <span class="text-base font-medium">{{history.AMOUNT}}</span></p>
+            <p>Company: <span class="text-base font-medium">{{history.COMPANY}}</span> </p>
+            <p>Meter ID :<span class="text-base font-medium"> {{history.METER_ID}}</span></p>
+            <p>Net Value: <span class="text-base font-medium">{{history.NET_VALUE}}</span> </p>
+        </div>
+    </div>
+  
+</div>
